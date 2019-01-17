@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>Hi, {{ current_user.username }}!</h1>
+    
+    <h2>Buy from MedStock</h2>
+	
+  <form action="" method="post" novalidate>
+<!-- novalidate is used so that validation is done by the flask not by html -->
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.cusName.label }}<br>
+	    {{ form.cusName(size=32) }}<br>
+	    {% for error in form.cusName.errors %}
+	    <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.medId.label }}<br>
+	    {{ form.medId() }}<br>
+	    {% for error in form.medId.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+	    {% endfor %}
+        </p>
+        <p>
+            {{ form.buyQnty.label }}<br>
+	    {{ form.buyQnty() }}<br>
+	    {% for error in form.buyQnty.errors %}
+	    <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        
+      
+        <p>{{ form.submit() }}</p>
+    </form>
+
+ <h2>Medicine Stock Available in Pharmacy</h2>
+	<table>
+         <thead>
+            <tr>
+               	<th>MedID</th>
+		        <th>MedName</th>
+               	<th>Manufacturer Id</th>
+               	<th>Manufacturer Name</th>
+               	<th>Available Quantity</th>
+	       	    <th>Price</th>
+	       	    <th>Expiry Date</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for p in medicinestock %}
+               <tr>
+                  <td>{{ p.medId }}</td>
+                  <td>{{ p.medName }}</td>
+                  <td>{{ p.manufId }}</td>
+                  <td>{{ p.manufName }}</td>
+		  <td>{{ p.availQnty }}</td>
+		  <td>{{ p.CO1 }}</td>
+		  <td>{{ p.expDate }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+{% endblock %}

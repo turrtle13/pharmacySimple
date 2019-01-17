@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>Hi, {{ current_user.username }}!</h1>
+    <h2>Previous Orders from Customers</h2>
+	<table>
+         <thead>
+            <tr>
+               	<th>Customer Id</th>
+		        <th>Customer Name</th>
+               	<th>Med Id</th>
+          
+               	<th>Qnty Bought</th>
+               	<th>On Date</th>
+	       	    <th>Price</th>
+	       	    <th>Total Cost</th>
+            </tr>
+         </thead>
+
+         <tbody>
+        
+            {% for p in boughtList %}
+              <tr>
+                  <td>{{ p.cusId }}</td>
+                  <td>{{ p.cusName }}</td>
+                  <td>{{ p.medId }}</td>
+                  <td>{{ p.buyQnty }}</td>
+		          <td>{{ p.date }}</td>
+		          <td>{{ p.CO1 }}</td>
+		          <td>Rs {{ p.buyQnty * p.CO1 }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+	<p><a href = "{{ url_for('addToMedStock') }}">Add meds to MedStock (Order) </a></p>
+    <br>
+    <p><a href = "{{ url_for('customerOrder') }}">Sell to Customer </a></p>
+<br>   
+    <h2>List of Medicines</h2> 
+    <table>
+         <thead>
+            <tr>
+               	<th>MedID</th>
+		        <th>MedName</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for p in m %}
+               <tr>
+                  <td>{{ p.medId }}</td>
+                  <td>{{ p.medName }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+{% endblock %}

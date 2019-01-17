@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+	<h2>Order from Manufacturer</h2>
+  <form action="" method="post" novalidate>
+<!-- novalidate is used so that validation is done by the flask not by html -->
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.medName.label }}<br>
+	    {{ form.medName(size=32) }}<br>
+	    {% for error in form.medName.errors %}
+	    <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.toManufId.label }}<br>
+	    {{ form.toManufId() }}<br>
+	    {% for error in form.toManufId.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+	    {% endfor %}
+        </p>
+        <p>
+            {{ form.wantQnty.label }}<br>
+	    {{ form.wantQnty() }}<br>
+	    {% for error in form.wantQnty.errors %}
+	    <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.CO1.label }}<br>
+	    {{ form.CO1() }}<br>
+	    {% for error in form.CO1.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+	    {% endfor %}
+        </p>
+        <p>
+            {{ form.expDate.label }}<br>
+	    {{ form.expDate() }}<br>
+	    {% for error in form.expDate.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+	    {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+	<h1>Hi, {{ current_user.username }}!</h1>
+<br>
+    <h2>Available Manufacturers</h2>
+    <table>
+         <thead>
+            <tr>
+               	<th>Manufacturer Id</th>
+               	<th>Manufacturer Name</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for p in manufList %}
+               <tr>
+                  <td>{{ p.manufId }}</td>
+		          <td>{{ p.manufName }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+<br>
+    <h2>Available Medicines with Manufacturer</h2>
+    <table>
+         <thead>
+            <tr>
+               	
+		        <th>StockId</th>
+               	<th>Manufacturer Id</th>
+                <th>MedID</th>
+                <th>MedName</th>
+               	<th>Available Quantity</th>
+	       	
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for p in manufacturerstock %}
+               <tr>
+                  <td>{{ p.mStockid }}</td>
+                  <td>{{ p.manufId }}</td>
+                  <td>{{ p.availMedId }}</td>
+                  <td>{{ p.availMedName }}</td>
+		          <td>{{ p.availManufQnty }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+<br>
+
+
+
+{% endblock %}
