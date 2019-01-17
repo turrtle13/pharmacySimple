@@ -1,2 +1,3 @@
 # pharmacySimple
-Simple pharmacy
+
+*A very simple pharmacy maintenance system*
